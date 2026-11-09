@@ -3,6 +3,10 @@ package com.example.capucareapp_grupo12
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.core.view.WindowCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.capucareapp_grupo12.ui.screens.PostScreen
+import com.example.capucareapp_grupo12.ui.viewmodel.PostViewModel
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,19 +16,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.capucareapp_grupo12.ui.theme.CapucareApp_Grupo12Theme
+import com.example.capucareapp_grupo12.ui.theme.ApiRestTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
-            CapucareApp_Grupo12Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            ApiRestTheme {
+                val postViewModel: PostViewModel = viewModel()
+                PostScreen(viewModel = postViewModel)
             }
         }
     }
